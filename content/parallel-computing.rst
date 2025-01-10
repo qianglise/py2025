@@ -62,8 +62,10 @@ There are two main models of parallel computing:
    **GPU computing**: This framwork takes advantages of the massively parallel compute units available in modern GPUs. 
    It is ideal when you need a large number of simple arithmetic operations
 
-In the next episode we will look at `Dask <https://dask.org/>`__, an array model extension and task scheduler, 
-which combines multiprocessing with (embarrassingly) parallel workflows and "lazy" execution.
+   **Distributed computing (Spark, Dask)**: Master-worker parallelism. Master builds a graph of task dependencies and schedules to execute tasks in the appropriate order.
+   In the next episode we will look at `Dask <https://dask.org/>`__, an array model extension and task scheduler, 
+   which combines multiprocessing with (embarrassingly) parallel workflows and "lazy" execution.
+
 
 In the Python world, it is common to see the word `concurrency` denoting any type of simultaneous 
 processing, including *threads*, *tasks* and *processes*.
