@@ -26,11 +26,6 @@ either on multiple threads or multiple processes.
 
 There are two main models of parallel computing:
 
-- **"Embarrassingly" parallel:** the code does not need to synchronize/communicate
-  with other instances, and you can run
-  multiple instances of the code separately, and combine the results
-  later.  If you can do this, great!  
-
 - **Shared memory parallelism (multithreading):** 
  
   - Parallel threads do separate work and communicate via the same memory and write to shared variables.
@@ -52,7 +47,6 @@ There are two main models of parallel computing:
    **"Embarrassingly" parallel**: If you can run multiple instances of a program and do not need to synchronize/communicate with other instances, 
    i.e. the problem at hand can be easily decomposed into independent tasks or datasets and there is no need to control access to shared resources, 
    it is known as an embarrassingly parallel program. A few examples are listed here:
-
      - Monte Carlo analysis
      - Ensemble calculations of numerical weather prediction
      - Discrete Fourier transform 
@@ -68,7 +62,11 @@ There are two main models of parallel computing:
 
 
 In the Python world, it is common to see the word `concurrency` denoting any type of simultaneous 
-processing, including *threads*, *tasks* and *processes*.
+processing, including *threads*, *tasks* and *processes*. 
+  - Concurrent tasks can be executed in any order but with the same final results
+  - Concurrent tasks can be but need not to be executed in parallel
+  - concurrent.futures provides implementation of thread and process-based executors for managing resources pools for running concurrent tasks
+
 
 .. warning::
 
@@ -670,5 +668,6 @@ See also
 
 .. keypoints::
 
-   - 1 Beaware of GIL and its impact on performance
-   - 2 Use threads for I/O-bound tasks
+   - Beaware of GIL and its impact on performance
+   - Use threads for I/O-bound tasks and multiprocessing for compute-bound tasks
+   - Make it right before trying to make it fast
