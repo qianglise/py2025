@@ -65,7 +65,7 @@ In the Python world, it is common to see the word `concurrency` denoting any typ
 processing, including *threads*, *tasks* and *processes*. 
   - Concurrent tasks can be executed in any order but with the same final results
   - Concurrent tasks can be but need not to be executed in parallel
-  - ``concurrent.futures`` provides implementation of thread and process-based executors for managing resources pools for running concurrent tasks
+  - ``concurrent.futures`` module provides implementation of thread and process-based executors for managing resources pools for running concurrent tasks
   - Concurrency is difficult: Race condition and Deadlock may arise in concurrent programs
 
 
@@ -158,7 +158,7 @@ This is how an I/O-bound application might look:
 
 The `threading library <https://docs.python.org/dev/library/threading.html#>`__ 
 provides an API for creating and working with threads. The simplest approach to 
-create and manage threads is to use the ``ThreadPoolExecutor`` class.
+create and manage threads is to use the ``ThreadPoolExecutor`` class from ``concurrent.futures`` module. 
 An example use case could be to download data from multiple websites using 
 multiple threads:
 
@@ -181,33 +181,6 @@ The speedup gained from multithreading I/O bound problems can be understood from
 Further details on threading in Python can be found in the **See also** section below.
 
 
-.. exercise:: Multithreading I/O-bound
-
-   In this exercise, we will simulate an I/O-bound process uing sleep function. 
-   Typical I/O-bounded processes are disk accesses, network requests etc.
-
-
-   .. literalinclude:: example/io_bound.py
-      :language: ipython
-
-
-
-.. exercise:: Race condition
-
-   Race condition is considered a common issue for multi-threading/processing applications, 
-   which occurs when two or more threads attempt to access the shared data and try to modify it at the same time. 
-   Think about how we can solve this problem.
-
-
-   .. literalinclude:: example/race.py
-      :language: ipython
-
-   .. solution:: Hints
-
-      - single thread/process: a very simple solution, but this may lead to poor performance. 
-      - locking resources: explicitly using locks, mutexes, semaphores, etc.
-      - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
-
 
 Multiprocessing
 ---------------
@@ -221,7 +194,7 @@ the parallel :meth:`Pool.map` function, similarly to what we saw for multithread
 
 .. note:: 
 
-   the ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper for 
+   ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper for 
    ``multiprocessing.Pool`` to unify the threading and process interfaces.
 
 
@@ -229,23 +202,8 @@ the parallel :meth:`Pool.map` function, similarly to what we saw for multithread
 Multiple arguments
 ^^^^^^^^^^^^^^^^^^
 
-In the following code, we define a power
-function, call the :meth:`cpu_count` method to get the number of CPUs on the machine,
-and then initialize a Pool object in a context manager and inside of it call the 
-:meth:`Pool.map` method to parallelize the computation.
-We can save the code in a file named `mp_map.py` or download from :download:`here <example/mp_map.py>`.
-
-.. literalinclude:: example/mp_map.py
-   :language: python
-   :emphasize-lines: 1, 11-12
-
 For functions that take multiple arguments one can instead use the :meth:`Pool.starmap`
-function (save as `mp_starmap.py` or download :download:`here <example/mp_starmap.py>`)
-
-.. literalinclude:: example/mp_starmap.py
-   :language: python
-   :emphasize-lines: 1, 10-11
-
+function, and there are other options as well, see below:
 
 .. tabs::
  
@@ -531,6 +489,34 @@ Upper-case methods are faster and are strongly recommended for large numeric dat
 
 Exercises
 ---------
+
+.. exercise:: Multithreading I/O-bound
+
+   In this exercise, we will simulate an I/O-bound process uing sleep function. 
+   Typical I/O-bounded processes are disk accesses, network requests etc.
+
+
+   .. literalinclude:: example/io_bound.py
+      :language: ipython
+
+
+
+.. exercise:: Race condition
+
+   Race condition is considered a common issue for multi-threading/processing applications, 
+   which occurs when two or more threads attempt to access the shared data and try to modify it at the same time. 
+   Think about how we can solve this problem.
+
+
+   .. literalinclude:: example/race.py
+      :language: ipython
+
+   .. solution:: Hints
+
+      - single thread/process: a very simple solution, but this may lead to poor performance. 
+      - locking resources: explicitly using locks, mutexes, semaphores, etc.
+      - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
+
 
 .. exercise:: Compute numerical integrals
 
