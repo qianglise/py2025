@@ -211,12 +211,14 @@ Multiprocessing
 The ``multiprocessing`` module in Python supports spawning processes using an API 
 similar to the ``threading`` module. It effectively side-steps the GIL by using 
 *subprocesses* instead of threads, where each subprocess is an independent Python 
-process.
-
-One of the simplest ways to use ``multiprocessing`` is via ``Pool`` objects and 
+process. One of the simplest ways to use ``multiprocessing`` is via ``Pool`` objects and 
 the parallel :meth:`Pool.map` function, similarly to what we saw for multithreading above. 
-Note that the ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper for 
-``multiprocessing.Pool`` to unify the threading and process interfaces.
+
+
+.. note:: 
+
+   the ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper for 
+   ``multiprocessing.Pool`` to unify the threading and process interfaces.
 
 
 
@@ -246,7 +248,7 @@ function (save as `mp_starmap.py` or download :download:`here <example/mp_starma
    .. tab:: ``pool.starmap``
 
       .. code-block:: python
-         :emphasize-lines: 7
+         :emphasize-lines: 6,8
 
          import multiprocessing as mp
    
