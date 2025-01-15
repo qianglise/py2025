@@ -223,7 +223,7 @@ Note that the ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper f
 Multiple arguments
 ^^^^^^^^^^^^^^^^^^
 
-In the following code, we define a :meth:`square` 
+In the following code, we define a power
 function, call the :meth:`cpu_count` method to get the number of CPUs on the machine,
 and then initialize a Pool object in a context manager and inside of it call the 
 :meth:`Pool.map` method to parallelize the computation.
@@ -246,19 +246,22 @@ function (save as `mp_starmap.py` or download :download:`here <example/mp_starma
    .. tab:: ``pool.starmap``
 
       .. code-block:: python
+         :emphasize-lines: 7
 
          import multiprocessing as mp
    
          def power_n(x, n):
              return x ** n
 
-         with mp.Pool(processes=nprocs) as pool:
-             res = pool.starmap(power_n, [(x, 2) for x in range(20)])
-         print(res)
+         if __name__ == '__main__':
+             with mp.Pool(processes=4) as pool:
+                 res = pool.starmap(power_n, [(x, 2) for x in range(20)])
+             print(res)
 
    .. tab:: function adapter
 
       .. code-block:: python
+         :emphasize-lines: 6,7,13
 
          from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
@@ -279,7 +282,7 @@ function (save as `mp_starmap.py` or download :download:`here <example/mp_starma
    .. tab:: multiple argument iterables
 
       .. code-block:: python
-         :emphasize-lines: 13
+         :emphasize-lines: 7
             
          from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 
