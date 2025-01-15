@@ -227,7 +227,7 @@ function, and there are other options as well, see below:
       .. code-block:: python
          :emphasize-lines: 6,7,13
 
-         from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+         from concurrent.futures import ProcessPoolExecutor
 
          def power_n(x, n):
              return x ** n
@@ -240,7 +240,7 @@ function, and there are other options as well, see below:
 
          with ProcessPoolExecutor(max_workers=4) as pool:
              res = pool.map(f_, chunks)
-         print(res)
+         print(list(res))
 
 
    .. tab:: multiple argument iterables
@@ -248,23 +248,22 @@ function, and there are other options as well, see below:
       .. code-block:: python
          :emphasize-lines: 7
             
-         from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+         from concurrent.futures import ProcessPoolExecutor
 
          def power_n(x, n):
              return x ** n
 
          with ProcessPoolExecutor(max_workers=4) as pool:
              res = pool.map(power_n, range(0,10,2), range(1,11,2))
-         print(res)
+         print(list(res))
    
 
 
 .. callout:: Interactive environments
 
    Functionality within multiprocessing requires that the ``__main__`` module be 
-   importable by children processes. This means that for example ``multiprocessing.Pool`` 
-   will not work in the interactive interpreter. A fork of multiprocessing, called 
-   ``multiprocess``, can be used in interactive environments like Jupyter.
+   importable by children processes. This means that some functions may not work 
+   in the interactive interpreter like Jupyter-notebook. 
 
 ``multiprocessing`` has a number of other methods which can be useful for certain 
 use cases, including ``Process`` and ``Queue`` which make it possible to have direct 
