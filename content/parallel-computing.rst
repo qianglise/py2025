@@ -65,7 +65,8 @@ In the Python world, it is common to see the word `concurrency` denoting any typ
 processing, including *threads*, *tasks* and *processes*. 
   - Concurrent tasks can be executed in any order but with the same final results
   - Concurrent tasks can be but need not to be executed in parallel
-  - concurrent.futures provides implementation of thread and process-based executors for managing resources pools for running concurrent tasks
+  - ``concurrent.futures`` provides implementation of thread and process-based executors for managing resources pools for running concurrent tasks
+  - Concurrency is difficult: Race condition and Deadlock may arise in concurrent programs
 
 
 .. warning::
@@ -108,7 +109,7 @@ However, multithreading is still relevant in two situations:
 Multithreaded libraries
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-NumPy and SciPy are built on external libraries such as LAPACK, FFTW append BLAS, 
+NumPy and SciPy are built on external libraries such as LAPACK, FFTW, BLAS, 
 which provide optimized routines for linear algebra, Fourier transforms etc.
 These libraries are written in C, C++ or Fortran and are thus not limited 
 by the GIL, so they typically support actual multihreading during the execution.
@@ -126,9 +127,9 @@ of threads manually:
 After setting this environment variable we continue as usual 
 and multithreading will be turned on.
 
-.. demo:: Demo: Multithreading NumPy 
+.. exercise:: Multithreading NumPy 
 
-   Here is an example which does a symmetrical matrix inversion of size 4000 by 4000.
+   Here is a piece of code which does a symmetrical matrix inversion of size 4000 by 4000.
    To run it, we can save it in a file named `omp_test.py` or download from :download:`here <example/omp_test.py>`.
 
    .. literalinclude:: example/omp_test.py
