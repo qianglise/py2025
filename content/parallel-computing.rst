@@ -29,7 +29,7 @@ There are two main models of parallel computing:
 - **Shared memory parallelism (multithreading):** 
  
   - Parallel threads do separate work and communicate via the same memory and write to shared variables.
-  - Multiple threads in a single Python program cannot execute at the same time (see GIL below)
+  - Multiple threads in a single Python program cannot execute at the same time (see **global interpreter lock** below)
   - Running multiple threads in Python is *only effective for certain I/O-bound tasks*
   - External libraries in other languages (e.g. C) which are called from Python can still use multithreading
 
