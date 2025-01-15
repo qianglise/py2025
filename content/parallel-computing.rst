@@ -204,7 +204,7 @@ Further details on threading in Python can be found in the **See also** section 
 
    .. solution:: Hints
 
-      - The most simplest solution is to use single thread/process, but this may lead to poor performance. 
+      - single thread/process: a very simple solution, but this may lead to poor performance. 
       - locking resources: explicitly using locks, mutexes, semaphores, etc.
       - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
 
