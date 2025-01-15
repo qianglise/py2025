@@ -181,6 +181,30 @@ The speedup gained from multithreading I/O bound problems can be understood from
 Further details on threading in Python can be found in the **See also** section below.
 
 
+.. exercise:: Multithreading I/O-bound
+
+   In this exercise, we will simulate an I/O-bound process uing sleep function. 
+   Typical I/O-bounded processes are disk accesses, network requests etc.
+
+
+   .. literalinclude:: example/io_bound.py
+      :language: ipython
+
+
+
+.. exercise:: Race condition
+
+   Race condition is considered a common issue for multi-threading/processing applications, 
+   which occurs when two or more threads attempt to access the shared data and try to modify it at the same time. 
+   Think about how we can solve this problem.
+
+
+   .. literalinclude:: example/race.py
+      :language: ipython
+
+
+
+
 Multiprocessing
 ---------------
 
@@ -191,6 +215,14 @@ process.
 
 One of the simplest ways to use ``multiprocessing`` is via ``Pool`` objects and 
 the parallel :meth:`Pool.map` function, similarly to what we saw for multithreading above. 
+Note that the ``concurrent.futures.ProcessPoolExecutor`` is actually a wrapper for 
+``multiprocessing.Pool`` to unify the threading and process interfaces.
+
+
+
+Multiple arguments
+^^^^^^^^^^^^^^^^^^
+
 In the following code, we define a :meth:`square` 
 function, call the :meth:`cpu_count` method to get the number of CPUs on the machine,
 and then initialize a Pool object in a context manager and inside of it call the 
@@ -207,6 +239,58 @@ function (save as `mp_starmap.py` or download :download:`here <example/mp_starma
 .. literalinclude:: example/mp_starmap.py
    :language: python
    :emphasize-lines: 1, 10-11
+
+
+.. tabs::
+ 
+   .. tab:: ``pool.starmap``
+
+      .. code-block:: python
+
+         import multiprocessing as mp
+   
+         def power_n(x, n):
+             return x ** n
+
+         with mp.Pool(processes=nprocs) as pool:
+             res = pool.starmap(power_n, [(x, 2) for x in range(20)])
+         print(res)
+
+   .. tab:: function adapter
+
+      .. code-block:: python
+
+         from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+
+         def power_n(x, n):
+             return x ** n
+
+         def f_(args):
+             return power_n(*args)
+
+         xs = np.arange(10)
+         chunks = np.array_split(xs, xs.shape[0]//2)
+
+         with ProcessPoolExecutor(max_workers=4) as pool:
+             res = pool.map(f_, chunks)
+         print(res)
+
+
+   .. tab:: multiple argument iterables
+
+      .. code-block:: python
+         :emphasize-lines: 13
+            
+         from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+
+         def power_n(x, n):
+             return x ** n
+
+         with ProcessPoolExecutor(max_workers=4) as pool:
+             res = pool.map(power_n, range(0,10,2), range(1,11,2))
+         print(res)
+   
+
 
 .. callout:: Interactive environments
 
