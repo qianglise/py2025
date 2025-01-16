@@ -491,7 +491,7 @@ Exercises
 
 .. exercise:: I/O-bound vs CPU-bound
 
-   In this exercise, we will simulate an I/O-bound process uing the :meth:`sleep`s function. 
+   In this exercise, we will simulate an I/O-bound process uing the :meth:`sleep` function. 
    Typical I/O-bounded processes are disk accesses, network requests etc.
 
 
