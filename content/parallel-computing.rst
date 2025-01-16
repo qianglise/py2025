@@ -508,13 +508,29 @@ Exercises
 
 
    .. literalinclude:: example/race.py
-      :language: ipython
+      :language: python
 
    .. solution:: Hints
 
       - single thread/process: a very simple solution, but this may lead to poor performance. 
       - locking resources: explicitly using locks, mutexes, semaphores, etc.
       - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
+
+   .. solution::
+
+      .. tabs::
+ 
+         .. tab:: locking
+
+            .. literalinclude:: exercise/race_lock.py
+               :language: python
+
+         .. tab:: duplicating
+
+            .. literalinclude:: exercise/race_dup.py
+               :language: python
+
+
 
 
 .. exercise:: Compute numerical integrals

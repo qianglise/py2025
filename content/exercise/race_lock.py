@@ -1,9 +1,14 @@
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from multiprocessing import Value
+from multiprocessing import Value, Lock
 
-# define a function to increment the value by 1
+lock = Lock()
+
+# adding lock
 def inc(i):
+    lock.acquire()
     val.value += 1
+    lock.release()
+
 
 # define a large number
 n = 100000
