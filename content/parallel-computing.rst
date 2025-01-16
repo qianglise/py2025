@@ -489,14 +489,14 @@ Upper-case methods are faster and are strongly recommended for large numeric dat
 Exercises
 ---------
 
-.. exercise:: Multithreading I/O-bound
+.. exercise:: I/O-bound vs CPU-bound
 
-   In this exercise, we will simulate an I/O-bound process uing sleep function. 
+   In this exercise, we will simulate an I/O-bound process uing the :meth:`sleep`s function. 
    Typical I/O-bounded processes are disk accesses, network requests etc.
 
 
    .. literalinclude:: example/io_bound.py
-      :language: ipython
+      :language: python
 
 
 
