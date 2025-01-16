@@ -494,10 +494,13 @@ Exercises
    In this exercise, we will simulate an I/O-bound process uing the :meth:`sleep` function. 
    Typical I/O-bounded processes are disk accesses, network requests etc.
 
-
    .. literalinclude:: example/io_bound.py
       :language: python
 
+   When the problem is compute intensive:
+
+   .. literalinclude:: example/cpu_bound.py
+      :language: python
 
 
 .. exercise:: Race condition
@@ -510,13 +513,11 @@ Exercises
    .. literalinclude:: example/race.py
       :language: python
 
-   .. solution:: Hints
+   .. solution::
 
       - single thread/process: a very simple solution, but this may lead to poor performance. 
       - locking resources: explicitly using locks, mutexes, semaphores, etc.
       - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
-
-   .. solution::
 
       .. tabs::
  
