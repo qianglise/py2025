@@ -5,7 +5,7 @@ from multiprocessing import Value
 def inc(i):
     val.value += 1
 
-# define a large number
+# using a large number to see the problem
 n = 100000
 
 # create a shared data and initialize it to 0

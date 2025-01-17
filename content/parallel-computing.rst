@@ -507,7 +507,8 @@ Exercises
 .. exercise:: Race condition
 
    Race condition is considered a common issue for multi-threading/processing applications, 
-   which occurs when two or more threads attempt to access the shared data and try to modify it at the same time. 
+   which occurs when two or more threads attempt to access the shared data and 
+   try to modify it at the same time. Try to run the example using different number ``n`` to see the differences.
    Think about how we can solve this problem.
 
 
