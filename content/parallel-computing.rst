@@ -118,7 +118,7 @@ like matrix operations or frequency analysis.
 
 Depending on configuration, NumPy will often use multiple threads by default, 
 but we can use the environment variable ``OMP_NUM_THREADS`` to set the number 
-of threads manually:
+of threads manually in a Unix-like enviroment:
 
 .. code-block:: console
 
@@ -127,23 +127,6 @@ of threads manually:
 After setting this environment variable we continue as usual 
 and multithreading will be turned on.
 
-.. exercise:: Multithreading NumPy 
-
-   Here is a piece of code which does a symmetrical matrix inversion of size 4000 by 4000.
-   To run it, we can save it in a file named `omp_test.py` or download from :download:`here <example/omp_test.py>`.
-
-   .. literalinclude:: example/omp_test.py
-      :language: python
-
-   Let us test it with 1 and 4 threads:
-
-   .. code-block:: console
-
-      $ export OMP_NUM_THREADS=1
-      $ python omp_test.py
-
-      $ export OMP_NUM_THREADS=4
-      $ python omp_test.py
 
 Multithreaded I/O
 ^^^^^^^^^^^^^^^^^
@@ -289,8 +272,7 @@ The idea behind MPI is that:
 - Tasks communicate and share data by sending messages.
 - Many higher-level functions exist to distribute information to other tasks
   and gather information from other tasks.
-- All tasks typically *run the entire code* and we have to be careful to avoid
-  that all tasks do the same thing.
+
 
 ``mpi4py`` provides Python bindings for the Message Passing Interface (MPI) standard.
 This is how a hello world MPI program looks like in Python:
@@ -489,6 +471,25 @@ Upper-case methods are faster and are strongly recommended for large numeric dat
 Exercises
 ---------
 
+.. exercise:: Multithreading NumPy 
+
+   Here is a piece of code which does a symmetrical matrix inversion of size 4000 by 4000.
+   To run it, we can save it in a file named `omp_test.py` or download from :download:`here <example/omp_test.py>`.
+
+   .. literalinclude:: example/omp_test.py
+      :language: python
+
+   Let us test it with 1 and 4 threads:
+
+   .. code-block:: console
+
+      $ export OMP_NUM_THREADS=1
+      $ python omp_test.py
+
+      $ export OMP_NUM_THREADS=4
+      $ python omp_test.py
+
+
 .. exercise:: I/O-bound vs CPU-bound
 
    In this exercise, we will simulate an I/O-bound process uing the :meth:`sleep` function. 
@@ -515,9 +516,8 @@ Exercises
 
    .. solution::
 
-      - single thread/process: a very simple solution, but this may lead to poor performance. 
-      - locking resources: explicitly using locks, mutexes, semaphores, etc.
-      - duplicating resources: making copys of data to each threads/processes so that they do not need to share, only works for small datasets
+      - locking resources: explicitly using locks
+      - duplicating resources: making copys of data to each threads/processes so that they do not need to share
 
       .. tabs::
  
@@ -525,6 +525,7 @@ Exercises
 
             .. literalinclude:: exercise/race_lock.py
                :language: python
+               :emphasize-lines: 2,4,8,10
 
          .. tab:: duplicating
 
